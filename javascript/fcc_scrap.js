@@ -120,9 +120,14 @@ if (testObj.hasOwnProperty('formats')) {
 
 // Loops
 var myArray = [];
-for (var i=1;i<56i++){
+for (var i=1; i<6; i++){
   myArray.push(i);
 }
 console.log(myArray)
-
-
+myArray = [];
+var i = 0;
+while (i<5) {
+  myArray.push(i);
+  i++;
+}
+console.log(myArray)
