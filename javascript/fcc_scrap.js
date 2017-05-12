@@ -85,4 +85,44 @@ function caseInSwitch(val) {
   }  
   return answer;  
 }
-console.log(caseInSwitch(1));
+// console.log(caseInSwitch(1));
+
+// Objects
+var testObj = {
+  "hat" : "ballcap",
+  "shirt" : "jersey",
+  "shoes" : "cleats",
+  'formats' : [
+      'short sleeve',
+      'long sleeve'
+    ],
+  'other': {
+        'a': 'nested',
+        'b' : {
+          'c' : "even more nested"
+        },
+        'c' : 'still nested'
+  }
+};
+// console.log(testObj.hat);
+// console.log(testObj['shirt']);
+testObj['shoes'] = 'spikes';
+var c = 'shoes';
+// console.log(testObj[c]);
+delete testObj['hat'];
+if (testObj.hasOwnProperty('formats')) {
+  // console.log(testObj['formats']);
+} else {
+  // console.log('Not Found');
+}
+// nested objects typically use dot notation until final level
+// console.log(testObj.other.b['c']);
+
+// Loops
+var myArray = [];
+for (var i=1;i<56i++){
+  myArray.push(i);
+}
+console.log(myArray)
+
+
