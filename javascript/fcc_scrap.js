@@ -123,11 +123,85 @@ var myArray = [];
 for (var i=1; i<6; i++){
   myArray.push(i);
 }
-console.log(myArray)
+// console.log(myArray)
 myArray = [];
 var i = 0;
 while (i<5) {
   myArray.push(i);
   i++;
 }
-console.log(myArray)
+// console.log(myArray)
+
+// Exercise: Profile Lookup
+//Setup
+var contacts = [
+    {
+        "firstName": "Akira",
+        "lastName": "Laine",
+        "number": "0543236543",
+        "likes": ["Pizza", "Coding", "Brownie Points"]
+    },
+    {
+        "firstName": "Harry",
+        "lastName": "Potter",
+        "number": "0994372684",
+        "likes": ["Hogwarts", "Magic", "Hagrid"]
+    },
+    {
+        "firstName": "Sherlock",
+        "lastName": "Holmes",
+        "number": "0487345643",
+        "likes": ["Intriguing Cases", "Violin"]
+    },
+    {
+        "firstName": "Kristian",
+        "lastName": "Vos",
+        "number": "unknown",
+        "likes": ["Javascript", "Gaming", "Foxes"]
+    }
+];
+
+
+function lookUpProfile(firstName, prop) {
+// Only change code below this line
+  for (var i=0; i<contacts.length; i++) {
+    if (contacts[i].firstName === firstName) {
+      if (contacts[i].hasOwnProperty(prop)) {
+        return contacts[i][prop];
+      } else {
+        return "No such property";
+      } 
+    }
+  }
+  return "No such contact"; 
+// Only change code above this line
+};
+
+// Change these values to test your function
+// console.log(lookUpProfile("Kristian", "lastName"));
+
+// Random
+var a = Math.floor(Math.random()*10);
+
+// Regular Expressions (Regex)
+// g --> global, return all matches not just the first, i--> ignore case, 
+// \d --> find digits, \s --> find white space, + --> match one or more digits
+// Capital S or D, inverts the expression
+var testString = "Ada Lovelace and Charles Babbage designed the first computer and the software that would have run on it.";
+var expression = /and/gi;
+var andCount = testString.match(expression);
+console.log(andCount)
+
+testString = "There are 3 cats but 4 dogs.";
+expression = /\d+/g;
+console.log(testString.match(expression));
+
+testString = "How many spaces are there in this sentence?";
+expression = /\s+/g;
+console.log(testString.match(expression).length);
+
+testString = "How many non-space characters are there in this sentence?";
+expression = /\S/g;  // Change this line
+console.log(testString.match(expression));
+
+
