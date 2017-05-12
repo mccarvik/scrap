@@ -78,6 +78,9 @@ function caseInSwitch(val) {
     case 4:
       answer = "delta";
       break;
+    default:
+      answer = "omega";
+      break;
   }  
   return answer;  
 }
