@@ -76,6 +76,7 @@ function caseInSwitch(val) {
       answer = "gamma";
       break;
     case 4:
+    case 5:
       answer = "delta";
       break;
     default:
