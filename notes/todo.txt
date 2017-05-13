@@ -1,4 +1,5 @@
-CURRENT - continue reading 51, p 268, multiplier models
+CURRENT - continue reading 51, p 271, multiplier models
+        load in P/E, P/B. P/S, P/CF
         tips calcs (ex: breakevens)
         option --> vanilla option pretty up
         
