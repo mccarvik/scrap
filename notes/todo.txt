@@ -1,7 +1,9 @@
-CURRENT - continue reading 51, p 271, multiplier models
-        load in P/E, P/B. P/S, P/CF
-        tips calcs (ex: breakevens)
-        option --> vanilla option pretty up
+CURRENT - 
+screener: continue reading 51, p 271, multiplier models
+          start an analytics script to use the equity class
+fcc / html / js: option --> vanilla option pretty up
+pff: keep going through chapters
+
         
         
 NOTE: great analytics available in CFA 1 https://bookshelf.vitalsource.com/ 
