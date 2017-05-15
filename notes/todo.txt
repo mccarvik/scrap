@@ -1,6 +1,6 @@
 CURRENT - 
 screener: continue reading 51, p 271, multiplier models
-          start an analytics script to use the equity class
+          https://matplotlib.org/examples/pylab_examples/barchart_demo.html --> bar chart
 fcc / html / js: option --> vanilla option pretty up
 pff: keep going through chapters
 
