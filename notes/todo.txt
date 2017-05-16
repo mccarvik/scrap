@@ -1,8 +1,8 @@
 CURRENT - 
 screener: continue reading 51, p 271, multiplier models
-          https://matplotlib.org/examples/pylab_examples/barchart_demo.html --> bar chart
           treynor / sharpe ratios
-fcc / html / js: option --> vanilla option pretty up
+fcc / html / js: option --> incorporate more jquery into options (greeks?)
+                              also finish JSON
 pff: keep going through chapters
 
         
