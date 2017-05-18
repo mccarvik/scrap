@@ -20,6 +20,11 @@
     $(".target:even").addClass("animated shake");
     $("body").addClass("animated hinge");
     
+    // Grabs JSON from url then sends it to specified function
+    $.getJSON("/json/cats.json", function(json) {
+      $(".message").html(JSON.stringify(json));
+    });
+    
   });
 </script>
 
