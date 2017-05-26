@@ -72,5 +72,23 @@ function booWho(bool) {
     return false;
   }
 }
-
 // console.log(booWho(null));
+
+function uniteUnique(arr) {
+  var ret = [];
+  for (var a=0; a < arguments.length; a++) {
+    var args = arguments[a];
+    for (var i=0; i < args.length; i++) {
+      var j = args[i];
+      if (typeof j === 'number') {
+        if (ret.indexOf(j) === -1) {
+          ret.push(j);
+        } 
+      } else {
+        ret.push(uniteUnique(j));
+      }
+    }
+  }
+  return ret;
+}
+// console.log(uniteUnique([1, 3, 2], [1, [5]], [2, [4]]));
