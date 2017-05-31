@@ -1,6 +1,10 @@
-var express=require('express');
-var app=express();
-app.set('view engine','jade');
-app.get('/',function(req, res) {});
-var server=app.listen(3000, function() {});
+var http=require('http')
+var server=http.createServer((function(request,response)
+{
+	response.writeHead(200, {"Content-Type" : "text/plain"});
+	response.end("Hello World\n");
+}));
+server.listen(8080, '0.0.0.0');
+
+console.log('Server running at http://0.0.0.0:8080/');
 

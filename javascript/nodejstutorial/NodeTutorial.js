@@ -1,10 +1,10 @@
 var Tutor=require('./Tutorial.js');
-exports=NodeTutorial=function()
+exports.NodeTutorial=function()
 {
-    console.log("Node Tutorial")
+    console.log("Node Tutorial");
     function pTutor()
     {
         var PTutor=Tutor;
         PTutor.tutorial;
     }
-}
+};
