@@ -2,7 +2,7 @@ freeCodeCamp.com
 Can start prettying up option --> vanilla option tab
 
 1. machine learning on financial stock picking
-2. calculator for fixed income products
+2. calculator for fixed income and derivative products
 3. Poker odds calculator
 4. networking project (multithreading, sending packets, ip addresses, etc)
 

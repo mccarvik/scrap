@@ -30,6 +30,11 @@ app.listen(8080, '0.0.0.0', function () {
  * Routes
  ********/
 app.route('/').get(rts.index);
-app.route('/partials/:name').get(rts.partials);
+// app.route('/directives').get(rts.directives);
+// app.route('/controller').get(rts.controller);
+// app.route('/directives').get(rts.partials('directives'));
+// app.route('/controllers').get(rts.partials('controllers'));
+// app.route('/partials/:name').get(rts.partials);
+app.route('/:name').get(rts.partials);
 app.route('*').get(rts.index);
 
