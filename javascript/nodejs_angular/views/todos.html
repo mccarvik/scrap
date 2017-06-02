@@ -1,0 +1,19 @@
+<html ng-app="app">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/ng_routes.js"></script>
+    <head>
+      <title>Hello Controllers in AngularJS</title>
+    </head>
+    <body>
+        <ng-view></ng-view>
+        <!-- Template -->
+        <script type="text/ng-template" id="/todos.html">
+          <ul>
+            <li ng-repeat="todo in todos">
+              <input type="checkbox" ng-model="todo.completed">
+              {{todo.name}}
+            </li>
+          </ul>
+        </script>
+    </body>
+</html>
