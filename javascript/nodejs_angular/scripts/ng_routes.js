@@ -1,7 +1,6 @@
 angular.module('app', ['ngRoute'])
 
   .controller('TodoController', ['$scope', function ($scope) {
-    console.log('here1');
     $scope.todos = [
       { name: 'AngularJS Directives', completed: true },
       { name: 'Data binding', completed: true },
@@ -16,10 +15,9 @@ angular.module('app', ['ngRoute'])
   }])
   
   .config(['$routeProvider', function ($routeProvider) {
-    console.log('here2');
     $routeProvider
-      .when('/todos', {
-        templateUrl: '/views/todos.html',
+      .when('/', {
+        templateUrl: 'todos.html',
         controller: 'TodoController'
-      });
+      })
   }]);

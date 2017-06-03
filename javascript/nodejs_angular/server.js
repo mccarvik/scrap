@@ -37,5 +37,5 @@ app.route('/favicon.ico').get(function(req, res) {
 }); 
 app.route('/').get(rts.index);
 app.route('/:name').get(rts.partials);
-// app.route('*').get(rts.index);
+app.route('*').get(rts.index);
 
