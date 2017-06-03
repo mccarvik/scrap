@@ -15,9 +15,10 @@ angular.module('app', ['ngRoute'])
   }])
   
   .config(['$routeProvider', function ($routeProvider) {
+    console.log('shouldnt be here');
     $routeProvider
       .when('/', {
-        templateUrl: 'todos.html',
+        templateUrl: 'todos_routes.html',
         controller: 'TodoController'
       })
   }]);
