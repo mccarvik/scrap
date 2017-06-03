@@ -17,7 +17,7 @@ angular.module('app', ['ngRoute'])
   .config(['$routeProvider', function ($routeProvider) {
     console.log('shouldnt be here');
     $routeProvider
-      .when('/', {
+      .when('/todos', {
         templateUrl: 'todos_routes.html',
         controller: 'TodoController'
       })

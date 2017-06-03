@@ -2,12 +2,12 @@ angular.module('app', ['ngRoute'])
 
   .factory('Todos', function(){
     return [
-      { name: 'AngularJS Directives', completed: true, note: 'add notes...' },
+      { name: 'AngularJS Directives', completed: true, note: 'this is important' },
       { name: 'Data binding', completed: true, note: 'add notes...' },
       { name: '$scope', completed: true, note: 'add notes...' },
       { name: 'Controllers and Modules', completed: true, note: 'add notes...' },
       { name: 'Templates and routes', completed: true, note: 'add notes...' },
-      { name: 'Filters and Services', completed: false, note: 'add notes...' },
+      { name: 'Filters and Services', completed: true, note: 'add notes...' },
       { name: 'Get started with Node/ExpressJS', completed: false, note: 'add notes...' },
       { name: 'Setup MongoDB database', completed: false, note: 'add notes...' },
       { name: 'Be awesome!', completed: false, note: 'add notes...' },
@@ -23,7 +23,6 @@ angular.module('app', ['ngRoute'])
   }])
   
   .config(['$routeProvider', function ($routeProvider) {
-    console.log('here1');
     $routeProvider
       .when('/', {
         templateUrl: '/todos.html',
