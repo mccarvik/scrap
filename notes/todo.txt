@@ -5,9 +5,7 @@ CURRENT:
     - pff: keep going through chapters
     - machine learning on morningstar data
     - start poker project
-    - Things to learn - NodeJS, AngularJS, React, MongoDB:
-        http://adrianmejia.com/blog/2014/09/28/angularjs-tutorial-for-beginners-with-nodejs-expressjs-and-mongodb/
-        http://www.guru99.com/node-js-modules-create-publish.html
+    - add React to finance project
 
         
 NOTE: great analytics available in CFA 1 https://bookshelf.vitalsource.com/ 
