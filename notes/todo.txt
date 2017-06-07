@@ -1,11 +1,13 @@
 CURRENT:
-    - screener: continue reading 51, p 271, multiplier models
-    - derivatives calcs - Swaps reading 51, p 112, CFA 2
+    - finance app: continue reading 51, p 271, multiplier models
+        * derivatives calcs - Swaps reading 51, p 112, CFA 2
+        * add React to finance project
+        * machine learning on morningstar data
+    - poker project
+        * keep working with new libraries
     - fcc / html / js: option --> incorporate more jquery into options, do research similar to eqs
     - pff: keep going through chapters
-    - machine learning on morningstar data
-    - start poker project
-    - add React to finance project
+    
 
         
 NOTE: great analytics available in CFA 1 https://bookshelf.vitalsource.com/ 
