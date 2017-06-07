@@ -1,0 +1,2 @@
+bootstrap:
+    - https://silviomoreto.github.io/bootstrap-select/examples/
