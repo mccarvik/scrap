@@ -10,6 +10,9 @@ Financial Analytics:
         * user name: mccarviks@gmail.com
         * pw: Kmac7272!
 
+Javascript:
+    - Object Oriented
+        * http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
 
 Quandl api data:
     - https://www.quandl.com/search?query=

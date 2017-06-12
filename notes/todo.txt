@@ -7,10 +7,11 @@ CURRENT:
         * keep working with new libraries
     - pff: keep going through chapters
     - more books:
-        * introduction to algorithms --> do them in javascript as well as python
-        * Programmin collective intelligence
+        * introduction to algorithms --> DO THEM IN JAVASCRIPT
+        * Programming collective intelligence
         * Learning Python Network Programming
-    
+
+
 Notes from Hull book:
 add grid for eq screener
 something for vol smiles
