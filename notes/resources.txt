@@ -1,5 +1,6 @@
 bootstrap:
     - https://silviomoreto.github.io/bootstrap-select/examples/
+    - https://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp
     
 Git:
     - https://github.com/spences10/cheat-sheets/blob/master/git.md
@@ -9,3 +10,6 @@ Financial Analytics:
         * user name: mccarviks@gmail.com
         * pw: Kmac7272!
 
+
+Quandl api data:
+    - https://www.quandl.com/search?query=

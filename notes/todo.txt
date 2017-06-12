@@ -5,10 +5,11 @@ CURRENT:
         * machine learning on morningstar data
     - poker project
         * keep working with new libraries
-    - fcc / html / js: option --> incorporate more jquery into options, do research similar to eqs
     - pff: keep going through chapters
-    
-        
+    - more books:
+        * introduction to algorithms --> do them in javascript as well as python
+        * Programmin collective intelligence
+        * Learning Python Network Programming
     
 Notes from Hull book:
 add grid for eq screener
