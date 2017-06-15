@@ -1,0 +1,2 @@
+disk usage:
+    du -sch .[!.]* * |sort -h
