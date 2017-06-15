@@ -10,20 +10,9 @@ CURRENT:
         * introduction to algorithms --> DO THEM IN JAVASCRIPT
         * Programming collective intelligence
         * Learning Python Network Programming
-
-
-Notes from Hull book:
-add grid for eq screener
-something for vol smiles
-monte carlo
-convertible bonds
-bond options
-price vol to yield vol calc
-caps floors swaps
-swaptions
     
-TIPS analytics
-interpolation techniques on the curve - spline
-options and volatility calcs
-equity analytics
-equity machine learning
+LIBRARIES TO LEARN:
+    - JS
+        * React, NodeJS, Angular, MongoDB
+    - CSS
+        * Bootstrap
