@@ -1,0 +1,33 @@
+CURRENT:
+    - finance app: 
+        * derivatives calcs - Swaps reading 51, p 112, CFA 2 / Hull book
+        * volatility calcs - Hull book / vol book
+        * Add more futures analytics using quandl api
+        * USING: sklearn, bootstrap, numpy, matplotlib, pandas, flask, mysql, jquery, ADD ANGULAR
+    - machine learning on morningstar data
+            ~ "Python Machine Learning"
+            ~ "Programming collective intelligence"
+    - poker live
+        * "Learning Python Network Programming"
+        * USING: ??? (bootstrap, mongodb, flask, angular)
+    - pff: 
+        * "Python For Finance" --> keep going through chapters
+    - Algorithms
+        * "introduction to algorithms" --> DO THEM IN JAVASCRIPT
+    - Web Developer Bootcamp
+        * Complete Bootcamp
+        * Find reason to use mongoDB --> poker calcs maybe?
+        * https://www.udemy.com/the-web-developer-bootcamp/learn/v4/overview
+
+    
+LIBRARIES TO LEARN:
+    - JS
+        * React, NodeJS, Angular, MongoDB, JQuery
+    - CSS
+        * Bootstrap
+    - Python
+        * Flask, Pandas, Numpy, Matplotlib, SkLearn
+    - SQL
+        * MySQL
+    - HTML
+        * HTML 5

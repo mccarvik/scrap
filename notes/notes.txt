@@ -16,7 +16,7 @@ create git repo on command line:
     4. push to origin as descrobed below
 
 load from repo to github:
-    1. git remote add origin https://github.com/mccarvik/finance_hub.git
+    1. git remote add origin https://github.com/mccarvik/REPO_NAME.git
     Sets the new remote
     2. git remote -v
     Verifies the new remote URL
