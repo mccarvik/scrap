@@ -18,6 +18,8 @@ CURRENT:
         * Complete Bootcamp
         * Find reason to use mongoDB --> poker calcs maybe?
         * https://www.udemy.com/the-web-developer-bootcamp/learn/v4/overview
+    - Poker Odds
+        * add mongo db for results (just hand 1 and hand 2 as keys and win% for each should be a good enough demo)
 
     
 LIBRARIES TO LEARN:

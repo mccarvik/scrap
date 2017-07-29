@@ -1,10 +1,9 @@
 disk usage:
     du -sch .[!.]* * |sort -h
+
+c9 disk usage:
+    du-c9
     
 NEED THIS:
     export LD_LIBRARY_PATH=/home/ubuntu//miniconda3/lib/
     
-???? accidentally deleted this:
- x86_64-linux-gnu
- https://jackiechen.org/2016/01/13/importerror-libffi-so-6-cannot-open-shared-object-file-no-such-file-or-directory/
- https://superuser.com/questions/623627/accidently-deleted-libstdc-so-6-ubuntu
