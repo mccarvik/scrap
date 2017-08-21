@@ -10,8 +10,6 @@ CURRENT:
     - poker live
         * "Learning Python Network Programming"
         * USING: ??? (bootstrap, mongodb, flask, angular)
-    - pff: 
-        * "Python For Finance" --> keep going through chapters
     - Algorithms
         * "introduction to algorithms" --> DO THEM IN JAVASCRIPT
     - Web Developer Bootcamp
