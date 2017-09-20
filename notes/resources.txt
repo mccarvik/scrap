@@ -1,5 +1,5 @@
 bootstrap:
-    - http://getbootstrap.com/
+    - https://getbootstrap.com/docs/3.3/components/
     - https://silviomoreto.github.io/bootstrap-select/examples/
     - https://www.w3schools.com/bootstrap/bootstrap_ref_css_helpers.asp
     
