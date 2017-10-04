@@ -5,10 +5,7 @@ CURRENT:
         * Add more futures analytics using quandl api
         * USING: sklearn, bootstrap, numpy, matplotlib, pandas, flask, mysql, jquery, ADD ANGULAR
     - machine learning on morningstar data
-            ~ Udacity Videos - https://classroom.udacity.com/courses/ud501 
             ~ "Programming collective intelligence"
-    - poker live
-        * USING: bootstrap, mongodb, flask, angular
     - Algorithms
         * "introduction to algorithms" --> DO THEM IN JAVASCRIPT
     - Web Developer Bootcamp
