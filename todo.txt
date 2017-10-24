@@ -8,8 +8,6 @@ CURRENT:
             ~ "Programming collective intelligence"
     - Algorithms
         * "introduction to algorithms" --> DO THEM IN JAVASCRIPT
-    - Poker Odds
-        * add mongo db for results (just hand 1 and hand 2 as keys and win% for each should be a good enough demo)
 
     
 LIBRARIES TO LEARN:
