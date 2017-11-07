@@ -1,11 +1,9 @@
 CURRENT:
-    - finance app: 
-        * derivatives calcs - Swaps reading 51, p 112, CFA 2 / Hull book
+    - finance:
         * volatility calcs - Hull book / vol book
-        * Add more futures analytics using quandl api
-        * USING: sklearn, bootstrap, numpy, matplotlib, pandas, flask, mysql, jquery, ADD ANGULAR
+        * go thru python for finance dx library
     - machine learning on morningstar data
-            ~ "Programming collective intelligence"
+        * "Programming collective intelligence"
     - Algorithms
         * "introduction to algorithms" --> DO THEM IN JAVASCRIPT
 
