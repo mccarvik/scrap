@@ -1,9 +1,10 @@
 CURRENT:
     - finance:
-        * volatility calcs - Hull book / vol book
+        * Hull book / vol book / cred deriv book
         * go thru python for finance dx library
     - machine learning on morningstar data
         * "Programming collective intelligence"
+        * start implementing machine learning solutions, make a trade off it --> will learn if nothing else
     - Algorithms
         * "introduction to algorithms" --> DO THEM IN JAVASCRIPT
 
