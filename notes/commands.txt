@@ -2,7 +2,7 @@ disk usage:
     du -sch .[!.]* * |sort -h
 
 c9 disk usage:
-    du-c9
+    du-c9 |sort -h
     
 NEED THIS:
     export LD_LIBRARY_PATH=/home/ubuntu//miniconda3/lib/
