@@ -46,20 +46,32 @@ def run(pos, start_dt, end_dt=dt.datetime.today()):
     # Grab Index data
     spy_hist = pd.read_csv('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&outputsize=full&symbol={0}&apikey={1}&datatype=csv'.format('SPY', API_KEY))
     spy_hist = spy_hist[(spy_hist.timestamp > start_dt.strftime('%Y-%m-%d')) & (spy_hist.timestamp < end_dt.strftime('%Y-%m-%d'))]
+    spy_hist = spy_hist.sort_values(by=['timestamp'], ascending=True)
     
     port_navs = pd.DataFrame(columns=['timestamp','adjusted_close'])
-    for d in list(spy_hist['timestamp'].order(ascending=True)):
+    for d in list(spy_hist['timestamp']):
         nav_temp = 0
         for p in pos:
             nav_temp += p.calc_pos_nav(d)
         port_navs.loc[len(port_navs)] = [d, nav_temp]
+        
     print_stats(pos, port_navs, spy_hist, start_dt, end_dt)
+    timeline_chart(pos, port_navs, spy_hist, start_dt, end_dt)
+    moving_avg_chart(pos, port_navs, spy_hist, start_dt, end_dt)
 
 
-def timeline_chart(pos, port_nav, spy_hist):
-    pass
+def timeline_chart(pos, port_nav, spy_hist, start_dt, end_dt):
+    plt.plot(port_nav['adjusted_close'])
+    plt.plot(sp500['42d'])
+    plt.plot(sp500['252d'])
+    plt.grid(True)
+    plt.xlabel('time')
+    plt.ylabel('index level')
+    # sp500['Close'].plot(grid=True, figsize=(8,5))
+    plt.savefig('png/ch3/sp500.png', dpi=300)
+    plt.close()
 
-def moving_avg_chart(port_navs, spy_hist):
+def moving_avg_chart(port_navs, spy_hist, start_dt, end_dt):
     pass
 
 
@@ -67,7 +79,7 @@ def print_stats(pos, port_navs, spy_hist, start_dt, end_dt):
     # vol, corr, beta
     # sortino, treynor
     # Return 
-    spy_ret = round(((spy_hist.iloc[0]['adjusted_close'] / spy_hist.iloc[-1]['adjusted_close']) - 1) * 100, 3)
+    spy_ret = round(((spy_hist.iloc[-1]['adjusted_close'] / spy_hist.iloc[0]['adjusted_close']) - 1) * 100, 3)
     print("SPY RETURN OVER HISTORY: " + str(spy_ret) + "%")
     port_ret = round(((port_navs.iloc[-1]['adjusted_close'] / port_navs.iloc[0]['adjusted_close']) - 1) * 100, 3)
     print("PORTFOLIO RETURN OVER HISTORY: " + str(port_ret) + "%")
@@ -75,12 +87,88 @@ def print_stats(pos, port_navs, spy_hist, start_dt, end_dt):
     
     # Total Return
     # Simply adding the dividends collected to the ending NAV as no reinvestment strategy was specified
-    spy_divs = (PORTFOLIO_VALUE / spy_hist.iloc[-1]['adjusted_close']) * spy_hist['dividend_amount'].sum()
+    spy_divs = (PORTFOLIO_VALUE / spy_hist.iloc[0]['adjusted_close']) * spy_hist['dividend_amount'].sum()
     spy_tot_ret = round(((((1 + spy_ret/100) * PORTFOLIO_VALUE + spy_divs) / PORTFOLIO_VALUE) - 1) * 100, 3)
     print("SPY TOTAL RETURN OVER HISTORY: " + str(spy_tot_ret) + "%")
     port_divs = sum([p.divs_collected() for p in pos])
     port_tot_ret = round(((((1 + port_ret/100) * PORTFOLIO_VALUE + port_divs) / PORTFOLIO_VALUE) - 1) * 100, 3)
     print("PORTFOLIO TOTAL RETURN OVER HISTORY: " + str(port_tot_ret) + "%")
+    print()
+    
+    # Max Drawdown
+    max_nav = port_navs.iloc[0]['adjusted_close']
+    max_drawdown = 0
+    max_drawdown_dt = port_navs.iloc[0]['timestamp']
+    for ix, row in port_navs.iterrows():
+        if row['adjusted_close'] - max_nav < max_drawdown:
+            max_drawdown = row['adjusted_close'] - max_nav
+            max_drawdown_dt = row['timestamp']
+        if row['adjusted_close'] > max_nav:
+            max_nav = row['adjusted_close']
+    print("PORTFOLIO MAX DRAWDOWN WAS: " + str(max_drawdown))
+    print("PORTFOLIO MAX DRAWDON OCCURRED ON: " + str(max_drawdown_dt))
+    print()
+    
+    # Volatility Calcs
+    # calculate the average 1 day volatility over the history than scale it to a 1 year vol
+    # thought about calcing for length of the history but decided to stick with one year
+    rolling_window = 1
+    # vol_term = np.sqrt(len(port_navs))
+    vol_term = np.sqrt(252)
+    # I know this isnt quite standard deviation but I had problems with the data naturally trending upward skewing the std
+    # aka port_navs['adjusted_close'].std() gave exaggerated results
+    # usually do a rolling vol like: port_navs['adjusted_close'].rolling(window=vol_window, center=False).std()
+    # but that would ignore vol from certain parts of the history
+    port_vol = abs(port_navs['adjusted_close'].pct_change(rolling_window)).mean() * vol_term * 100
+    print("PORTFOLIO VOLATILITY (avg 1 yr move) OVER HISTORY: " + str(port_vol) + "%")
+    
+    # A little weird calculating this over a history and not a year, but considering the user can input the timeframe
+    # the history may be less than a year so thought safer to do it this way
+    sharpe_ratio = (port_ret - spy_ret) / (port_vol)
+    print("PORTFOLIO SHARPE RATIO OVER HISTORY: " + str(sharpe_ratio))
+    print()
+    
+    
+    # Correlation, beta, sortino ration, treynor ratio
+    # Calculating on returns, not values to avoid issue mentioned above with vol
+    corr = correlation(port_navs['adjusted_close'].pct_change(rolling_window), spy_hist['adjusted_close'].pct_change(rolling_window))
+    bt = beta(port_navs['adjusted_close'].pct_change(rolling_window), spy_hist['adjusted_close'].pct_change(rolling_window))
+    print("PORTFOLIO CORRELATION TO SPY OVER HISTORY: " + str(corr))
+    print("PORTFOLIO BETA TO SPY OVER HISTORY: " + str(bt))
+    print("PORTFOLIO TREYNOR RATIO TO SPY OVER HISTORY: " + str(((port_ret - spy_ret) / 100) / (bt)))
+    print()
+    port_navs['daily_chg'] = port_navs['adjusted_close'].pct_change(rolling_window)
+    downside_vol = abs(port_navs[port_navs.daily_chg < 0]['daily_chg']).mean() * vol_term * 100
+    print("PORTFOLIO DOWNSIDE VOL OVER HISTORY: " + str(downside_vol) + "%")
+    print("PORTFOLIO SORTINO RATIO TO SPY OVER HISTORY: " + str((port_ret - spy_ret) / (downside_vol)))
+    
+
+def covariance(data1, data2):
+    # measure of joint variation --> when both numbers move away from mean simultaneously, creates large values and vice versa
+    mx = data1.mean()
+    my = data2.mean()
+    tot = 0
+    for x, y in zip(data1, data2):
+        tot += (x - mx) * (y - my)
+    return tot / len(data1)
+
+
+def correlation(data1, data2):
+    # Pearson correlation coefficient. Will always between -1 and 1
+    data1 = data1.dropna()
+    data2 = data2.dropna()
+    std1 = data1.std()
+    std2 = data2.std()
+    return covariance(data1, data2) / (std1 * std2)
+
+
+def beta(dep_var, indep_var):
+    # covariance(dependent var, independent var) / variance(independant var)
+    dep_var = dep_var.dropna()
+    indep_var = indep_var.dropna()
+    cov = covariance(dep_var, indep_var)
+    var = indep_var.var()
+    return cov / var
 
 
 if __name__ == '__main__':
