@@ -1,3 +1,5 @@
+import warnings
+warnings.filterwarnings('ignore')
 import pdb, sys, getopt
 import matplotlib as mpl
 mpl.use('Agg')
@@ -38,6 +40,7 @@ class Position():
         hist = pd.read_csv('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&outputsize=full&symbol={0}&apikey={1}&datatype=csv'.format(self.sym, API_KEY))
         self.hist = hist[(hist.timestamp > start.strftime('%Y-%m-%d')) & (hist.timestamp < end.strftime('%Y-%m-%d'))]
         self.init_price = self.hist.iloc[-1]['adjusted_close']
+        self.hist = self.hist.sort_values(by=['timestamp'], ascending=True)
         # This will create fractional shares, not realistic but didnt know if you wanted there to be a cash position instead for the remainder
         self.shares = (PORTFOLIO_VALUE * self.wgt) / self.init_price
     
@@ -55,27 +58,57 @@ def run(pos, start_dt, end_dt=dt.datetime.today()):
             nav_temp += p.calc_pos_nav(d)
         port_navs.loc[len(port_navs)] = [d, nav_temp]
         
-    print_stats(pos, port_navs, spy_hist, start_dt, end_dt)
-    timeline_chart(pos, port_navs, spy_hist, start_dt, end_dt)
-    moving_avg_chart(pos, port_navs, spy_hist, start_dt, end_dt)
+    print_stats(pos, port_navs, spy_hist)
+    moving_avg_chart(port_navs, spy_hist)
+    timeline_chart(pos, port_navs, spy_hist)
+    
 
 
-def timeline_chart(pos, port_nav, spy_hist, start_dt, end_dt):
-    plt.plot(port_nav['adjusted_close'])
-    plt.plot(sp500['42d'])
-    plt.plot(sp500['252d'])
+def timeline_chart(pos, port_navs, spy_hist):
+    port_navs['timestamp'] = pd.to_datetime(port_navs['timestamp'])
+    spy_hist['timestamp'] = pd.to_datetime(spy_hist['timestamp'])
+    port_navs = port_navs.set_index('timestamp')
+    spy_hist = spy_hist.set_index('timestamp')
+    
+    plt.figure(figsize=(10, 6))
     plt.grid(True)
     plt.xlabel('time')
     plt.ylabel('index level')
-    # sp500['Close'].plot(grid=True, figsize=(8,5))
-    plt.savefig('png/ch3/sp500.png', dpi=300)
+    plt.plot(port_navs['adjusted_close'] / port_navs['adjusted_close'].ix[0] * 100, label='port')
+    plt.plot(spy_hist['adjusted_close'] / spy_hist['adjusted_close'].ix[0] * 100, label='spy')
+    for p in pos:
+        hist = p.hist
+        hist['timestamp'] = pd.to_datetime(hist['timestamp'])
+        hist = hist.set_index('timestamp')
+        plt.plot(hist['adjusted_close'] / hist['adjusted_close'].ix[0] * 100, label=p.sym)
+    
+    plt.legend(loc='upper left')
+    plt.savefig('timeline.png', dpi=300)
     plt.close()
 
-def moving_avg_chart(port_navs, spy_hist, start_dt, end_dt):
-    pass
+def moving_avg_chart(port_navs, spy_hist):
+    port_navs['timestamp'] = pd.to_datetime(port_navs['timestamp'])
+    spy_hist['timestamp'] = pd.to_datetime(spy_hist['timestamp'])
+    port_navs = port_navs.set_index('timestamp')
+    spy_hist = spy_hist.set_index('timestamp')
+    spy_hist['50d'] = pd.rolling_mean(spy_hist['adjusted_close'], window=50) / spy_hist['adjusted_close'].ix[0] * 100
+    spy_hist['252d'] = pd.rolling_mean(spy_hist['adjusted_close'], window=252) / spy_hist['adjusted_close'].ix[0] * 100
+    port_navs['50d'] = pd.rolling_mean(port_navs['adjusted_close'], window=50) / port_navs['adjusted_close'].ix[0] * 100
+    port_navs['252d'] = pd.rolling_mean(port_navs['adjusted_close'], window=252) / port_navs['adjusted_close'].ix[0] * 100
+    spy_hist['adjusted_close'] = spy_hist['adjusted_close'] / spy_hist['adjusted_close'].ix[0] * 100
+    port_navs['adjusted_close'] = port_navs['adjusted_close'] / port_navs['adjusted_close'].ix[0] * 100
+    
+    plt.figure(figsize=(10, 6))
+    plt.xlabel('time')
+    plt.ylabel('index level')
+    plt.plot(port_navs[['adjusted_close', '50d', '252d']], label=['port', 'port 50d', 'port 252d'])
+    plt.plot(spy_hist[['adjusted_close', '50d', '252d']], label=['spy', 'spy 50d', 'spy 252d'])
+    plt.legend(['port', 'port 50d', 'port 252d', 'spy', 'spy 50d', 'spy 252d'], loc='upper left')
+    plt.savefig('mvg_avg.png', dpi=300)
+    plt.close()
 
 
-def print_stats(pos, port_navs, spy_hist, start_dt, end_dt):
+def print_stats(pos, port_navs, spy_hist):
     # vol, corr, beta
     # sortino, treynor
     # Return 
@@ -135,6 +168,7 @@ def print_stats(pos, port_navs, spy_hist, start_dt, end_dt):
     bt = beta(port_navs['adjusted_close'].pct_change(rolling_window), spy_hist['adjusted_close'].pct_change(rolling_window))
     print("PORTFOLIO CORRELATION TO SPY OVER HISTORY: " + str(corr))
     print("PORTFOLIO BETA TO SPY OVER HISTORY: " + str(bt))
+    print("PORTFOLIO ALPHA TO SPY OVER HISTORY: " + str(port_ret - bt * spy_ret))
     print("PORTFOLIO TREYNOR RATIO TO SPY OVER HISTORY: " + str(((port_ret - spy_ret) / 100) / (bt)))
     print()
     port_navs['daily_chg'] = port_navs['adjusted_close'].pct_change(rolling_window)
@@ -201,8 +235,8 @@ if __name__ == '__main__':
     
     positions = []
     # For testing purposes
-    tickers = ['MSFT']
-    weights = [1]
+    # tickers = ['MSFT']
+    # weights = [1]
     for t, w in zip(tickers, weights):
         t_pos = Position(t, w)
         t_pos.grab_history(start_dt)
