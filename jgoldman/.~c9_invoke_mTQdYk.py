@@ -29,11 +29,9 @@ class Position():
     def __init__(self, symbol, weight):
         self.wgt = weight
         self.sym = symbol
-        self.cash_left = 0
     
     def divs_collected(self):
         return self.hist['dividend_amount'].sum() * self.shares
-        
     
     def calc_pos_nav(self, dt):
         if len(self.hist[self.hist.timestamp == dt]['adjusted_close']) != 0:
@@ -41,10 +39,6 @@ class Position():
         else:
             # No price history yet, so can't compute NAV, just return o
             return 0
-    
-    def rebalance(self, port_nav, date):
-        self.shares = int((port_nav * self.wgt) / self.hist[dt.datetime.strptime(date, "%Y-%m-%d")]['adjusted_close'])
-        self.cash_left = (((PORTFOLIO_VALUE * self.wgt) / self.hist[date]['adjusted_close']) - int((PORTFOLIO_VALUE * self.wgt) / self.hist[date]['adjusted_close'])) * self.hist[date]['adjusted_close']
     
     def grab_history(self, start, end=dt.datetime.today()):
         # Pulls in the whole history for each ticker so takes a little bit to run, not ideal but didnt see a time parameter option in the api specs
@@ -54,8 +48,7 @@ class Position():
         self.init_price = self.hist.iloc[-1]['adjusted_close']
         self.hist = self.hist.sort_values(by=['timestamp'], ascending=True)
         # This will create fractional shares, not realistic but didnt know if you wanted there to be a cash position instead for the remainder
-        self.shares = int((PORTFOLIO_VALUE * self.wgt) / self.init_price)
-        self.cash_left = (((PORTFOLIO_VALUE * self.wgt) / self.init_price) - int((PORTFOLIO_VALUE * self.wgt) / self.init_price)) * self.init_price
+        self.shares = (PORTFOLIO_VALUE * self.wgt) / self.init_price
     
 
 def run(pos, start_dt, end_dt=dt.datetime.today()):
@@ -66,19 +59,12 @@ def run(pos, start_dt, end_dt=dt.datetime.today()):
     spy_hist = spy_hist.sort_values(by=['timestamp'], ascending=True)
     
     port_navs = pd.DataFrame(columns=['timestamp','adjusted_close'])
-    pdb.set_trace()
     for d in list(spy_hist['timestamp']):
         nav_temp = 0
-        try:
-            for p in pos:
-                p.rebalance(port_navs.iloc[-1], d)
-        except:
-            print("Maybe first day?")
         for p in pos:
-            nav_temp += p.calc_pos_nav(d) + sum([pp.cash_left for pp in pos])
-            
+            nav_temp += p.calc_pos_nav(d)
         port_navs.loc[len(port_navs)] = [d, nav_temp]
-    
+        
     print_stats(pos, port_navs, spy_hist)
     moving_avg_chart(port_navs, spy_hist)
     timeline_chart(pos, port_navs, spy_hist)
@@ -134,7 +120,6 @@ def print_stats(pos, port_navs, spy_hist):
     # vol, corr, beta
     # sortino, treynor
     # Return 
-    pdb.set_trace()
     spy_ret = round(((spy_hist.iloc[-1]['adjusted_close'] / spy_hist.iloc[0]['adjusted_close']) - 1) * 100, 3)
     print("SPY RETURN OVER HISTORY: " + str(spy_ret) + "%")
     port_ret = round(((port_navs.iloc[-1]['adjusted_close'] / port_navs.iloc[0]['adjusted_close']) - 1) * 100, 3)
@@ -242,6 +227,7 @@ if __name__ == '__main__':
     
     EXAMPLE COMMAND LINE RUN: python coding_challenge.py -d 20150101 -w 0.5,0.1,0.1,0.1,0.1,0.1 -t MSFT
     '''
+    pdb.set_trace()
     start_dt = dt.datetime(2000,1,1)
     tickers = ['googl', 'ba', 'f', 'vz', 'ge']
     weights = [0.2, 0.2, 0.2, 0.2, 0.2]
