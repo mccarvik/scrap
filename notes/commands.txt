@@ -7,3 +7,5 @@ c9 disk usage:
 NEED THIS:
     export LD_LIBRARY_PATH=/home/ubuntu//miniconda3/lib/
     
+switch python alias:
+    alias python=python3
