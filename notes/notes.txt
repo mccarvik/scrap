@@ -1,13 +1,18 @@
-access mysql: "mysql -u root" or "sudo mysql"
-hostname of mysql: mccarvik-playground-2305615
-socket: /var/run/mysqld/mysqld.soc
-restarting mysql: sudo /etc/init.d/mysql restart
+mysql:
+    to start --> sudo service mysqld start
+    to stop --> sudo service mysqld stop
+    for cli --> mysql -u root -p 
+        (make sure service is started using command above)
+    
+    access mysql: "mysql -u root" or "sudo mysql"
+    hostname of mysql: mccarvik-playground-2305615
+    socket: /var/run/mysqld/mysqld.soc
+    restarting mysql: sudo /etc/init.d/mysql restart
+    
+pip:
+    use sudo python3 -m pip install {}
+    location --> /usr/local/lib64/
 
-import location:
-sys.path.append('/home/ubuntu/miniconda3/lib/python3.5/site-packages')
-
-place a python debugger breakpoint: 
-import pdb; pdb.set_trace()
 
 create git repo on command line:
     1. git init // creates repo

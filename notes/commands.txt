@@ -8,4 +8,10 @@ NEED THIS:
     export LD_LIBRARY_PATH=/home/ubuntu//miniconda3/lib/
     
 switch python alias:
+    sudo mv /usr/bin/python /usr/bin/python27
+    sudo ln -s /usr/bin/python36 /usr/bin/python
+    python --version
+    
+    or 
+    
     alias python=python3
