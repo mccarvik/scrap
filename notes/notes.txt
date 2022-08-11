@@ -2,6 +2,9 @@ pip:
     use sudo python3 -m pip install {}
     location --> /usr/local/lib64/
 
+pylint:
+    use python3 -m pylint {}
+
 Market Dashboard:
 https://af89f29b1af54d6685549a603c3502f3.vfs.cloud9.us-east-2.amazonaws.com/
 
