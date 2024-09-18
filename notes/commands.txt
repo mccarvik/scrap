@@ -15,3 +15,7 @@ switch python alias:
     or 
     
     alias python=python3
+
+
+Maybe check these places when shit hits the fan:
+setx PYTHONPATH "C:\Users\mccar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\;C:\Users\mccar\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\;c:\users\mccar\appdata\local\programs\python\python311\lib\site-packages\;C:\Users\mccar\AppData\Local\Programs\Python\Python311\Scripts\"
