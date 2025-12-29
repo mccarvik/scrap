@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Data files
+*.csv
+*.mat
+*.xls
+*.xlsx
+
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.svg
+
+# Archives and compressed files
+*.zip
+*.gz
+*.tar
+*.rar
+*.7z
+
+# PDFs
+*.pdf
+
+# Large datasets
+anduril_prep/pytorch_for_deeplearning/basics/data_management/module_1_3/flower_data/
+anduril_prep/pytorch_for_deeplearning/basics/pytorch_workflow/data/MNIST/
+anduril_prep/pytorch_for_deeplearning/deep_learning_notebooks/data/
+
+# All zips folder
+anduril_prep/pytorch_for_deeplearning/zips/
+
+# All PDFs folder
+anduril_prep/pytorch_for_deeplearning/pdfs/
+
+# CAD files
+*.SLDPRT
+*.STEP
+*.STL
+
+# Logs
+*.log
+npm-debug.log*
+
