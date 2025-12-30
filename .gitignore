@@ -38,9 +38,10 @@ anduril_prep/pytorch_for_deeplearning/basics/data_management/module_1_3/flower_d
 anduril_prep/pytorch_for_deeplearning/basics/data_management/module_1_3/corrupted_flower_data/
 anduril_prep/pytorch_for_deeplearning/basics/data_management/flower_data/
 anduril_prep/pytorch_for_deeplearning/basics/pytorch_workflow/data/MNIST/
-anduril_prep/pytorch_for_deeplearning/basics/nn_components/module_1_4/dataset/
-anduril_prep/pytorch_for_deeplearning/deep_learning_notebooks/data/
 anduril_prep/pytorch_for_deeplearning/basics/nn_components/build_nn/cifar_100/
+anduril_prep/pytorch_for_deeplearning/basics/nn_components/debug_nn/dataset/
+anduril_prep/pytorch_for_deeplearning/basics/nn_components/debug_nn/module_1_4/dataset/
+anduril_prep/pytorch_for_deeplearning/deep_learning_notebooks/data/
 
 # All zips folder
 anduril_prep/pytorch_for_deeplearning/zips/
