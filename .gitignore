@@ -35,7 +35,10 @@ __pycache__/
 
 # Large datasets
 anduril_prep/pytorch_for_deeplearning/basics/data_management/module_1_3/flower_data/
+anduril_prep/pytorch_for_deeplearning/basics/data_management/module_1_3/corrupted_flower_data/
+anduril_prep/pytorch_for_deeplearning/basics/data_management/flower_data/
 anduril_prep/pytorch_for_deeplearning/basics/pytorch_workflow/data/MNIST/
+anduril_prep/pytorch_for_deeplearning/basics/nn_components/module_1_4/dataset/
 anduril_prep/pytorch_for_deeplearning/deep_learning_notebooks/data/
 
 # All zips folder
