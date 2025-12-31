@@ -101,13 +101,14 @@ def load_cifar100_subset(target_classes, train_transform, val_transform, root='.
 
 
 
-def visualise_images(dataset, grid):
+def visualise_images(dataset, grid, save_path=None):
     """
     Displays a grid of images from a dataset, with one random image per class.
 
     Args:
         dataset: The dataset object containing the images and labels.
         grid (tuple): A tuple specifying the number of rows and columns for the image grid.
+        save_path (str, optional): Path to save the figure. If None, figure is only displayed.
     """
 
     # Create a shallow copy of the dataset to avoid modifying the original
@@ -177,6 +178,10 @@ def visualise_images(dataset, grid):
 
     # Adjust subplot parameters for a tight layout
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    # Save the plot if save_path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {save_path}")
     # Display the plot
     plt.show()
 
@@ -185,7 +190,7 @@ def visualise_images(dataset, grid):
     
     
 
-def plot_training_metrics(metrics):
+def plot_training_metrics(metrics, save_path=None):
     """
     Plots the training and validation metrics from a model training process.
 
@@ -196,6 +201,7 @@ def plot_training_metrics(metrics):
     Args:
         metrics (list): A list or tuple containing three lists:
                         [train_losses, val_losses, val_accuracies].
+        save_path (str, optional): Path to save the figure. If None, figure is only displayed.
     """
     # Unpack the metrics into their respective lists
     train_losses, val_losses, val_accuracies = metrics
@@ -255,12 +261,16 @@ def plot_training_metrics(metrics):
 
     # Adjust subplot parameters for a tight layout
     plt.tight_layout()
+    # Save the plot if save_path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {save_path}")
     # Display the plots
     plt.show()
     
     
     
-def visualise_predictions(model, data_loader, device, grid):
+def visualise_predictions(model, data_loader, device, grid, save_path=None):
     """
     Visualizes model predictions on a grid of images from a dataset.
 
@@ -269,6 +279,7 @@ def visualise_predictions(model, data_loader, device, grid):
         data_loader: The PyTorch DataLoader for the dataset.
         device: The device (e.g., 'cpu' or 'cuda') to run the model on.
         grid (tuple): A tuple specifying the number of rows and columns for the image grid.
+        save_path (str, optional): Path to save the figure. If None, figure is only displayed.
     """
     # Set the model to evaluation mode
     model.eval()
@@ -356,5 +367,9 @@ def visualise_predictions(model, data_loader, device, grid):
 
     # Adjust subplot parameters for a tight layout
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    # Save the plot if save_path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {save_path}")
     # Show the final plot
     plt.show()
