@@ -333,7 +333,7 @@ def get_dataset_dataloaders(batch_size=64, subset_size=10_000, imbalanced=False)
 
 
 
-def plot_learning(history, color, axes=None):
+def plot_learning(history, color, axes=None, save_path=None):
     """Plots the training loss and validation accuracy from a training history.
 
     This function generates two subplots: one for the training loss per epoch
@@ -347,8 +347,10 @@ def plot_learning(history, color, axes=None):
         axes (matplotlib.axes.Axes, optional): A tuple of two Matplotlib axes
                                                objects to plot on. If None, new
                                                subplots are created. Defaults to None.
+        save_path (str, optional): Path to save the figure. If None, figure is only displayed.
     """
     # If no axes are provided, create a new figure with two subplots
+    created_own_figure = axes is None
     if axes is None:
         fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
@@ -371,12 +373,16 @@ def plot_learning(history, color, axes=None):
     axes[1].set_ylabel("Accuracy")
 
     # Adjust layout if a new figure was created to prevent overlapping titles
-    if axes is None:
+    if created_own_figure:
         plt.tight_layout()
+        # Save the plot if save_path is provided
+        if save_path:
+            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            print(f"Figure saved to: {save_path}")
 
         
 
-def plot_learning_curves(colors, labels, histories):
+def plot_learning_curves(colors, labels, histories, save_path=None):
     """Plots and compares the learning curves for multiple training histories.
 
     This function creates a figure with two subplots (training loss and
@@ -388,6 +394,7 @@ def plot_learning_curves(colors, labels, histories):
         labels (list): A list of labels for the legend, corresponding to each history.
         histories (list): A list of history dictionaries. Each dictionary should
                           contain keys like 'train_loss' and 'val_acc'.
+        save_path (str, optional): Path to save the figure. If None, figure is only displayed.
     """
     # Create a new figure and a set of subplots for the learning curves
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
@@ -409,6 +416,10 @@ def plot_learning_curves(colors, labels, histories):
 
     # Adjust the plot layout to prevent labels from overlapping
     plt.tight_layout()
+    # Save the plot if save_path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {save_path}")
 
 
 
@@ -534,7 +545,7 @@ def train_epoch(model, train_dataloader, optimizer, loss_fcn, device, pbar):
     return epoch_loss, epoch_acc
 
 
-def plot_learning_rates(history, color, label="", ax=None):
+def plot_learning_rates(history, color, label="", ax=None, save_path=None):
     """Plots the learning rate schedule over epochs.
 
     This function generates a plot showing how the learning rate changed
@@ -550,8 +561,10 @@ def plot_learning_rates(history, color, label="", ax=None):
         ax (matplotlib.axes.Axes, optional): A Matplotlib axes object to plot on.
                                               If None, a new figure and axes are
                                               created. Defaults to None.
+        save_path (str, optional): Path to save the figure. If None, figure is only displayed.
     """
     # If no axes are provided, create a new figure and axes
+    created_own_figure = ax is None
     if ax is None:
         fig, ax = plt.subplots(figsize=(8, 5))
 
@@ -565,10 +578,15 @@ def plot_learning_rates(history, color, label="", ax=None):
     ax.set_ylabel("Learning Rate")
     # Display the legend on the plot
     ax.legend()
+    
+    # Save the plot if save_path is provided and we created our own figure
+    if created_own_figure and save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {save_path}")
 
     
 
-def plot_learning_rates_curves(training_curves_new, colors, labels):
+def plot_learning_rates_curves(training_curves_new, colors, labels, save_path=None):
     """Plots and compares multiple learning rate schedules on a single figure.
 
     This function creates a figure and overlays the learning rate curves from
@@ -578,6 +596,7 @@ def plot_learning_rates_curves(training_curves_new, colors, labels):
         training_curves_new (list): A list of training history dictionaries.
         colors (list): A list of color strings, one for each history.
         labels (list): A list of labels for the legend, corresponding to each history.
+        save_path (str, optional): Path to save the figure. If None, figure is only displayed.
     """
     # Create a new figure and a single axes object for the plot
     fig, ax = plt.subplots(figsize=(8, 5))
@@ -587,6 +606,10 @@ def plot_learning_rates_curves(training_curves_new, colors, labels):
         plot_learning_rates(history, color, label=label, ax=ax)
     # Adjust the plot layout to prevent labels from overlapping
     plt.tight_layout()
+    # Save the plot if save_path is provided
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {save_path}")
 
 
 
