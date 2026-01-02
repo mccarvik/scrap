@@ -42,9 +42,10 @@ anduril_prep/pytorch_for_deeplearning/basics/nn_components/build_nn/cifar_100/
 anduril_prep/pytorch_for_deeplearning/basics/nn_components/debug_nn/dataset/
 anduril_prep/pytorch_for_deeplearning/basics/nn_components/debug_nn/module_1_4/dataset/
 anduril_prep/pytorch_for_deeplearning/deep_learning_notebooks/data/
-anduril_prep/pytorch_for_deeplearning/techniques/hyperparameters/module_2_1_1/cifar10/
-anduril_prep/pytorch_for_deeplearning/techniques/hyperparameters/module_2_1_1/cifar10_3class_imbalanced/
-anduril_prep/pytorch_for_deeplearning/techniques/hyperparameters/cifar10/
+anduril_prep/pytorch_for_deeplearning/techniques/hyperparameters/hyperp/module_2_1_1/cifar10/
+anduril_prep/pytorch_for_deeplearning/techniques/hyperparameters/hyperp/module_2_1_1/cifar10_3class_imbalanced/
+anduril_prep/pytorch_for_deeplearning/techniques/hyperparameters/hyperp/cifar10/
+anduril_prep/pytorch_for_deeplearning/techniques/hyperparameters/tuning/module_2_1_2/cifar10/
 
 # All zips folder
 anduril_prep/pytorch_for_deeplearning/zips/
